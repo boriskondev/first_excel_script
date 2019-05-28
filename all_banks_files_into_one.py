@@ -36,5 +36,5 @@ print(f"The execution of this script {time_took.seconds} seconds.")
 # The script works well with (almost) all the files of the banks.
 # The ones of UniCredit should be additionally saved into .xlsx as there are fucked up somehow.
 # Important:
-# Dani - how do you handles UniCredit's files?
+# Dani - how do you handle UniCredit's files?
 # Some values start on the first row, so it is now an option to ignore it - some other check here
