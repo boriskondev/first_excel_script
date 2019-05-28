@@ -21,7 +21,6 @@ for folder in source_path.glob("*"):
         data_frames.append(data_frame)
 
 all_data = pd.concat(data_frames)
-
 chdir(source_path)
 path = Path() / '_Results'
 path.mkdir()
