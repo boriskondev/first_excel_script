@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a05d1cc6-3da2-4d71-90ea-6acb4237eb26" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/first_python_script.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/first_python_script.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_date_and_drop1.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_date_and_drop1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/all_banks_files_into_one.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_banks_files_into_one.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/values_to_skip.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_banks_files_into_one.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_xlsx_to_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/multiple_folders.py" beforeDir="false" afterPath="$PROJECT_DIR$/multiple_folders.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,13 +14,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/add_date_and_drop1.py">
+        <entry file="file://$PROJECT_DIR$/script_xlsx_to_csv.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="5" column="110" selection-start-line="5" selection-start-column="110" selection-end-line="5" selection-end-column="110" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="23">
+              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -45,7 +37,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/multiple_folders.py" />
         <option value="$PROJECT_DIR$/tests.py" />
         <option value="$PROJECT_DIR$/time_took.py" />
         <option value="$PROJECT_DIR$/all_banks_into_one_v2.py" />
@@ -58,8 +49,10 @@
         <option value="$PROJECT_DIR$/all_banks_files_into_one_v.2.py" />
         <option value="$PROJECT_DIR$/regex_pattern.py" />
         <option value="$PROJECT_DIR$/add_date_column.py" />
-        <option value="$PROJECT_DIR$/all_banks_files_into_one.py" />
         <option value="$PROJECT_DIR$/add_date_and_drop1.py" />
+        <option value="$PROJECT_DIR$/multiple_folders.py" />
+        <option value="$PROJECT_DIR$/all_banks_files_into_one.py" />
+        <option value="$PROJECT_DIR$/script_xslx_to_csv.py" />
       </list>
     </option>
   </component>
@@ -109,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.add_date_and_drop1">
+  <component name="RunManager" selected="Python.all_banks_files_into_one">
     <configuration name="add_date_and_drop1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="first_python_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -164,7 +157,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/all_banks_files_into_one.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\pmg23_b.kondev\Desktop\Python\first_python_script\script_xlsx_to_csv.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -217,10 +210,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.all_banks_files_into_one" />
         <item itemvalue="Python.add_date_and_drop1" />
         <item itemvalue="Python.add_date_column" />
         <item itemvalue="Python.regex_pattern" />
-        <item itemvalue="Python.all_banks_files_into_one" />
         <item itemvalue="Python.dataframe_drop" />
       </list>
     </recent_temporary>
@@ -236,18 +229,25 @@
       <option name="presentableId" value="Default" />
       <updated>1558615258909</updated>
     </task>
+    <task id="LOCAL-00001" summary="Second commit">
+      <created>1559057905426</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559057905426</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4971591" visible="true" weight="0.16759333" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4971591" visible="true" weight="0.19459888" />
       <window_info id="Structure" order="1" sideWeight="0.50284094" side_tool="true" weight="0.16776751" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993395" visible="true" weight="0.50886524" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993395" weight="0.40425533" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.48049647" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -280,6 +280,10 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second commit" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pandas/io/excel.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/xlrd/book.py" />
@@ -287,16 +291,6 @@
     <entry file="file://$PROJECT_DIR$/tests.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/tokenize.py" />
     <entry file="file://$PROJECT_DIR$/all_banks_into_one_v2.py" />
-    <entry file="file://$PROJECT_DIR$/files_in_one_folder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/time_took.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -305,16 +299,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/df_drop_1_crit.py" />
-    <entry file="file://$PROJECT_DIR$/multiple_folders.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="27" column="40" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/regex_pattern.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
@@ -331,16 +315,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/all_banks_files_into_one_v.2.py" />
-    <entry file="file://$PROJECT_DIR$/all_banks_files_into_one.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="35" column="51" lean-forward="true" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/values_to_skip.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
@@ -348,13 +322,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/add_date_and_drop1.py">
+    <entry file="file://$PROJECT_DIR$/drop_all_add_date.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="5" column="110" selection-start-line="5" selection-start-column="110" selection-end-line="5" selection-end-column="110" />
+        <state relative-caret-position="322">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/files_in_one_folder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-198">
+          <caret line="7" column="25" lean-forward="true" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/multiple_folders.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_xslx_to_csv.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_xlsx_to_csv.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
         </state>
       </provider>
     </entry>
