@@ -32,8 +32,8 @@ for bank_folder in source_path.glob("*"):
 all_data = pd.concat(all_data_frames)
 all_data = all_data.reset_index(drop=True)
 
-values_to_skip = ["ID", "transaction_id", "TransactionID", "TRNX ID", "TRANSACTION ID", "Card Serno", "Transaction ID",
-                  "Source Reg Num", "id", "ID of the transaction", "transaction_number", "Id", "TRNX No. ", "Id на транзакция"]
+values_to_skip = ["ID", "transaction_id", "TransactionID", "TRNX ID", "TRANSACTION ID", "Card Serno", "Transaction ID", "Source Reg Num",
+                  "id", "ID of the transaction", "transaction_number", "Id", "TRNX No. ", "Id на транзакция", "Trnx No. "]
 
 for value_to_skip in values_to_skip:
     indices_to_remove = all_data[(all_data["Transaction"] == value_to_skip)].index

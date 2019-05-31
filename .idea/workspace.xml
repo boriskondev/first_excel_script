@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a05d1cc6-3da2-4d71-90ea-6acb4237eb26" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/read_file.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script_xlsx_to_csv_all_save.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script_xlsx_to_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_xlsx_to_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_xlsx_to_csv_all_save.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_xlsx_to_csv_all_save.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,24 +12,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_xlsx_to_csv_all_save.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-285">
-              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+            <state relative-caret-position="280">
+              <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/read_file.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -68,8 +57,8 @@
         <option value="$PROJECT_DIR$/all_banks_files_into_one.py" />
         <option value="$PROJECT_DIR$/script_xslx_to_csv.py" />
         <option value="$PROJECT_DIR$/script_xlsx_to_csv.py" />
-        <option value="$PROJECT_DIR$/script_xlsx_to_csv_all_save.py" />
         <option value="$PROJECT_DIR$/read_file.py" />
+        <option value="$PROJECT_DIR$/script_xlsx_to_csv_all_save.py" />
       </list>
     </option>
   </component>
@@ -86,7 +75,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -98,6 +86,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -122,7 +111,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.read_file">
+  <component name="RunManager" selected="Python.script_xlsx_to_csv_all_save">
     <configuration name="read_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="first_python_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -188,8 +177,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.read_file" />
         <item itemvalue="Python.script_xlsx_to_csv_all_save" />
+        <item itemvalue="Python.read_file" />
         <item itemvalue="Python.script_xlsx_to_csv" />
       </list>
     </recent_temporary>
@@ -219,19 +208,25 @@
       <option name="project" value="LOCAL" />
       <updated>1559129215443</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Working fine with exports and winners per day.">
+      <created>1559144745151</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1559144745151</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4971591" visible="true" weight="0.1858618" />
       <window_info id="Structure" order="1" sideWeight="0.50284094" side_tool="true" weight="0.16776751" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32914925" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993395" visible="true" weight="0.5744681" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993395" weight="0.5744681" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.48049647" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -267,7 +262,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second commit" />
     <MESSAGE value="Working fine. TODO: Draws and pivot exports." />
-    <option name="LAST_COMMIT_MESSAGE" value="Working fine. TODO: Draws and pivot exports." />
+    <MESSAGE value="Working fine with exports and winners per day." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working fine with exports and winners per day." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pandas/io/excel.py" />
@@ -342,20 +338,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_xlsx_to_csv_all_save.py">
+    <entry file="file://$PROJECT_DIR$/read_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="97">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/read_file.py">
+    <entry file="file://$PROJECT_DIR$/script_xlsx_to_csv_all_save.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        <state relative-caret-position="280">
+          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
