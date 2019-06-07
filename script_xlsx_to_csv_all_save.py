@@ -41,6 +41,9 @@ for value_to_skip in values_to_skip:
 
 file_with_all_data = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/All_week_{week_to_process}.csv"
 all_data.to_csv(file_with_all_data, index=False)
+pivot_with_all_data = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/Pivot_week_{week_to_process}.xlsx"
+pivot = pd.pivot_table(all_data, index=["Bank"], values=["Transaction"], aggfunc=len, columns=["Date"])
+pivot.to_excel(pivot_with_all_data)
 
 winners_to_draw = int(input("\nWinners per day: "))
 reserves_to_draw = int(input("Reserves per day: "))
