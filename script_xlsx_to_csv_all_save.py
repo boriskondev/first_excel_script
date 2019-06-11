@@ -2,13 +2,14 @@ from pathlib import Path
 from datetime import datetime
 import pandas as pd
 import re
+import os
 
 time_start = datetime.now()
 # print(time_start)
 
 pattern = r"\d{2}\.\d{2}\.\d{4}"
 
-source_path = Path("C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder")
+source_path = Path(f"{os.getcwd()}" + "\Test folder")
 
 week_to_process = int(input("Week to process: "))
 
@@ -39,9 +40,17 @@ for value_to_skip in values_to_skip:
     indices_to_remove = all_data[(all_data["Transaction"] == value_to_skip)].index
     all_data.drop(indices_to_remove, inplace=True)
 
-file_with_all_data = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/All_week_{week_to_process}.csv"
+if week_to_process < 10:
+    week_to_process = "0" + str(week_to_process)
+
+if not os.path.exists("Results"):
+    os.makedirs("Results")
+if not os.path.exists(f"Results/Week_{week_to_process}"):
+    os.makedirs(f"Results/Week_{week_to_process}")
+
+file_with_all_data = f"Results/Week_{week_to_process}/_All_week_{week_to_process}.csv"
 all_data.to_csv(file_with_all_data, index=False)
-pivot_with_all_data = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/Pivot_week_{week_to_process}.xlsx"
+pivot_with_all_data = f"Results/Week_{week_to_process}/_All_week_{week_to_process}_pivot.xlsx"
 pivot = pd.pivot_table(all_data, index=["Bank"], values=["Transaction"], aggfunc=len, columns=["Date"])
 pivot.to_excel(pivot_with_all_data)
 
@@ -53,13 +62,15 @@ week_dates_list = all_data["Date"].unique()
 
 for date in week_dates_list:
     date_data_frame = all_data[all_data.Date == date]
-    date_file_to_save = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/{date}_all.csv"
-    date_data_frame.to_csv(date_file_to_save, index=False, header=None)
+    date_all_file = f"Results/Week_{week_to_process}/All_{date}.csv"
+    if os.path.isfile(date_all_file):
+        os.remove(date_all_file)
+    date_data_frame.to_csv(date_all_file, index=False, header=None)
     sample_data_frame = date_data_frame.sample(n=entries_to_sample)
-    # sample_data_frame.iloc[0] = ["Winners", None, None]
-    # sample_data_frame.iloc[reserves_to_draw] = ["Reserves", None, None]
-    winners_file_to_save = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/{date}_winners.csv"
-    sample_data_frame.to_csv(winners_file_to_save, index=False, header=None)
+    date_winners_file = f"Results/Week_{week_to_process}/Winners_{date}.csv"
+    if os.path.isfile(date_winners_file):
+        os.remove(date_winners_file)
+    sample_data_frame.to_csv(date_winners_file, index=False, header=None)
     print(f"{date}", end=" ")
 
 print("\nAll files are ready!")
