@@ -3,13 +3,18 @@ from datetime import datetime
 import pandas as pd
 import re
 import os
+import docx
 
 time_start = datetime.now()
-# print(time_start)
+
+project_config = docx.Document("config.docx")
+
+source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"",""))
+output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"",""))
+
+values_to_skip = project_config.paragraphs[2].text.split("=")[1].replace("\"","").split(",")
 
 pattern = r"\d{2}\.\d{2}\.\d{4}"
-
-source_path = Path(f"{os.getcwd()}" + "\Test folder")
 
 week_to_process = int(input("Week to process: "))
 
@@ -33,9 +38,6 @@ for bank_folder in source_path.glob("*"):
 all_data = pd.concat(all_data_frames)
 all_data = all_data.reset_index(drop=True)
 
-values_to_skip = ["ID", "transaction_id", "TransactionID", "TRNX ID", "TRANSACTION ID", "Card Serno", "Transaction ID", "Source Reg Num",
-                  "id", "ID of the transaction", "transaction_number", "Id", "TRNX No. ", "Id на транзакция", "Trnx No. ", "TR_ID"]
-
 for value_to_skip in values_to_skip:
     indices_to_remove = all_data[(all_data["Transaction"] == value_to_skip)].index
     all_data.drop(indices_to_remove, inplace=True)
@@ -43,14 +45,19 @@ for value_to_skip in values_to_skip:
 if week_to_process < 10:
     week_to_process = "0" + str(week_to_process)
 
-if not os.path.exists("Results"):
-    os.makedirs("Results")
-if not os.path.exists(f"Results/Week_{week_to_process}"):
-    os.makedirs(f"Results/Week_{week_to_process}")
+results_folder = project_config.paragraphs[1].text.split("=")[1].replace("\"","").split("\\")[-1]
 
-file_with_all_data = f"Results/Week_{week_to_process}/_All_week_{week_to_process}.csv"
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
+
+os.chdir(output_path)
+
+if not os.path.exists(f"Week_{week_to_process}"):
+    os.makedirs(f"Week_{week_to_process}")
+
+file_with_all_data = f"Week_{week_to_process}/_All_week_{week_to_process}.csv"
 all_data.to_csv(file_with_all_data, index=False)
-pivot_with_all_data = f"Results/Week_{week_to_process}/_All_week_{week_to_process}_pivot.xlsx"
+pivot_with_all_data = f"Week_{week_to_process}/_All_week_{week_to_process}_pivot.xlsx"
 pivot = pd.pivot_table(all_data, index=["Bank"], values=["Transaction"], aggfunc=len, columns=["Date"])
 pivot.to_excel(pivot_with_all_data)
 
@@ -62,12 +69,12 @@ week_dates_list = all_data["Date"].unique()
 
 for date in week_dates_list:
     date_data_frame = all_data[all_data.Date == date]
-    date_all_file = f"Results/Week_{week_to_process}/All_{date}.csv"
+    date_all_file = f"Week_{week_to_process}/All_{date}.csv"
     if os.path.isfile(date_all_file):
         os.remove(date_all_file)
     date_data_frame.to_csv(date_all_file, index=False, header=None)
     sample_data_frame = date_data_frame.sample(n=entries_to_sample)
-    date_winners_file = f"Results/Week_{week_to_process}/Winners_{date}.csv"
+    date_winners_file = f"Week_{week_to_process}/Winners_{date}.csv"
     if os.path.isfile(date_winners_file):
         os.remove(date_winners_file)
     sample_data_frame.to_csv(date_winners_file, index=False, header=None)
@@ -77,5 +84,5 @@ print("\nAll files are ready!")
 
 time_end = datetime.now()
 time_took = time_end - time_start
-# print(time_end)
+
 print(f"The execution of this script took {time_took.seconds} seconds.")

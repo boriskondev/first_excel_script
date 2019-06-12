@@ -7,7 +7,7 @@ time_start = datetime.now()
 
 pattern = r"\d{2}\.\d{2}\.\d{4}"
 
-source_path = Path("C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder")
+source_path = Path("C:/Users/pmg23_b.kondev/Desktop/Python/all_in_one_script/Test folder")
 
 week_to_process = int(input("Week to process: "))
 
@@ -48,19 +48,19 @@ reserves = sample_data_frame.iloc[winners_to_draw:]
 print(f"Winner/s: \n {winners}")
 print(f"Reserve/s: \n {reserves}")
 
-file_with_all_data = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/All_week_{week_to_process}.csv"
+file_with_all_data = f"C:/Users/pmg23_b.kondev/Desktop/Python/all_in_one_script/Test folder/All_week_{week_to_process}.csv"
 all_data.to_csv(file_with_all_data, index=False)
 
 week_dates_list = all_data["Date"].unique()
 for date in week_dates_list:
     date_data_frame = all_data[all_data.Date == date]
-    date_file_to_save = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/{date}.csv"
+    date_file_to_save = f"C:/Users/pmg23_b.kondev/Desktop/Python/all_in_one_script/Test folder/{date}.csv"
     date_data_frame.to_csv(date_file_to_save, index=False, header=None)
     print(f"{date}", end=" ")
 
 sample_data_frame.iloc[0] = ["Winners", None, None]
 sample_data_frame.iloc[reserves_to_draw] = ["Reserves", None, None]
-file_with_all_drawn = f"C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/Winners_week_{week_to_process}.csv"
+file_with_all_drawn = f"C:/Users/pmg23_b.kondev/Desktop/Python/all_in_one_script/Test folder/Winners_week_{week_to_process}.csv"
 sample_data_frame.to_csv(file_with_all_drawn, index=False, header=None)
 
 print("\nAll files are ready!")

@@ -8,7 +8,7 @@ banks = {
     "Allianz": "all",
 }
 
-source_path = Path("C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Test folder/bac")
+source_path = Path("C:/Users/pmg23_b.kondev/Desktop/Python/all_in_one_script/Test folder/bac")
 
 data_frames = []
 all_data_frames = []
