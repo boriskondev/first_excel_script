@@ -4,6 +4,7 @@ import pandas as pd
 import re
 import os
 import docx
+import yaml
 
 time_start = datetime.now()
 
@@ -11,8 +12,8 @@ project_config = docx.Document("config.docx")
 
 source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"",""))
 output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"",""))
-
 values_to_skip = project_config.paragraphs[2].text.split("=")[1].replace("\"","").split(",")
+banks_list = yaml.safe_load(project_config.paragraphs[3].text.split("=")[1].replace("\"",""))
 
 pattern = r"\d{2}\.\d{2}\.\d{4}"
 
@@ -45,8 +46,6 @@ for value_to_skip in values_to_skip:
 if week_to_process < 10:
     week_to_process = "0" + str(week_to_process)
 
-results_folder = project_config.paragraphs[1].text.split("=")[1].replace("\"","").split("\\")[-1]
-
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 
@@ -58,6 +57,8 @@ if not os.path.exists(f"Week_{week_to_process}"):
 file_with_all_data = f"Week_{week_to_process}/_All_week_{week_to_process}.csv"
 all_data.to_csv(file_with_all_data, index=False)
 pivot_with_all_data = f"Week_{week_to_process}/_All_week_{week_to_process}_pivot.xlsx"
+#all_data["Bank"].replace(banks_list, inplace=True)
+#all_data["Bank"] = all_data["Bank"].map(lambda x: x.encode("utf-8").decode("utf-8"))
 pivot = pd.pivot_table(all_data, index=["Bank"], values=["Transaction"], aggfunc=len, columns=["Date"])
 pivot.to_excel(pivot_with_all_data)
 
