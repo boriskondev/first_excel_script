@@ -10,10 +10,10 @@ time_start = datetime.now()
 
 project_config = docx.Document("config.docx")
 
-source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"",""))
-output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"",""))
-values_to_skip = project_config.paragraphs[2].text.split("=")[1].replace("\"","").split(",")
-# banks_list = yaml.safe_load(project_config.paragraphs[3].text.split("=")[1].replace("\"",""))
+daily_source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"", ""))
+output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"",""))
+values_to_skip = project_config.paragraphs[3].text.split("=")[1].replace("\"","").split(",")
+# banks_list = yaml.safe_load(project_config.paragraphs[4].text.split("=")[1].replace("\"",""))
 
 pattern = r"\d{2}\.\d{2}\.\d{4}"
 
@@ -22,7 +22,7 @@ week_to_process = int(input("Week to process: "))
 all_data_frames = []
 week_dates_list = []
 
-for bank_folder in source_path.glob("*"):
+for bank_folder in daily_source_path.glob("*"):
     new_col_name = bank_folder.name
     for week_folder in bank_folder.iterdir():
         if int(week_folder.name.split(".")[0]) == week_to_process:
@@ -73,13 +73,13 @@ for date in week_dates_list:
     date_all_file = f"Week_{week_to_process}/All_{date}.csv"
     if os.path.isfile(date_all_file):
         os.remove(date_all_file)
-    date_data_frame.to_csv(date_all_file, index=False, header=None)
-    sample_data_frame = date_data_frame.sample(n=entries_to_sample)
-    sample_data_frame.columns = ["Bank", "Transaction", "Date"]
+    date_data_frame.to_csv(date_all_file, index=False)
+    winners_data_frame = date_data_frame.sample(n=entries_to_sample)
+    # winners_data_frame.columns = ["Bank", "Transaction", "Date"]
     date_winners_file = f"Week_{week_to_process}/Winners_{date}.xlsx"
     if os.path.isfile(date_winners_file):
         os.remove(date_winners_file)
-    sample_data_frame.to_excel(date_winners_file, index=False)
+    winners_data_frame.to_excel(date_winners_file, index=False, header=False)
     print(f"{date}", end=" ")
 
 print("\nAll files are ready!")
