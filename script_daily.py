@@ -13,7 +13,7 @@ project_config = docx.Document("config.docx")
 source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"",""))
 output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"",""))
 values_to_skip = project_config.paragraphs[2].text.split("=")[1].replace("\"","").split(",")
-banks_list = yaml.safe_load(project_config.paragraphs[3].text.split("=")[1].replace("\"",""))
+# banks_list = yaml.safe_load(project_config.paragraphs[3].text.split("=")[1].replace("\"",""))
 
 pattern = r"\d{2}\.\d{2}\.\d{4}"
 
@@ -57,8 +57,8 @@ if not os.path.exists(f"Week_{week_to_process}"):
 file_with_all_data = f"Week_{week_to_process}/_All_week_{week_to_process}.csv"
 all_data.to_csv(file_with_all_data, index=False)
 pivot_with_all_data = f"Week_{week_to_process}/_All_week_{week_to_process}_pivot.xlsx"
-#all_data["Bank"].replace(banks_list, inplace=True)
-#all_data["Bank"] = all_data["Bank"].map(lambda x: x.encode("utf-8").decode("utf-8"))
+# all_data["Bank"].replace(banks_list, inplace=True)
+# all_data["Bank"] = all_data["Bank"].map(lambda x: x.encode("utf-8").decode("utf-8"))
 pivot = pd.pivot_table(all_data, index=["Bank"], values=["Transaction"], aggfunc=len, columns=["Date"])
 pivot.to_excel(pivot_with_all_data)
 
@@ -75,10 +75,11 @@ for date in week_dates_list:
         os.remove(date_all_file)
     date_data_frame.to_csv(date_all_file, index=False, header=None)
     sample_data_frame = date_data_frame.sample(n=entries_to_sample)
-    date_winners_file = f"Week_{week_to_process}/Winners_{date}.csv"
+    sample_data_frame.columns = ["Bank", "Transaction", "Date"]
+    date_winners_file = f"Week_{week_to_process}/Winners_{date}.xlsx"
     if os.path.isfile(date_winners_file):
         os.remove(date_winners_file)
-    sample_data_frame.to_csv(date_winners_file, index=False, header=None)
+    sample_data_frame.to_excel(date_winners_file, index=False)
     print(f"{date}", end=" ")
 
 print("\nAll files are ready!")
