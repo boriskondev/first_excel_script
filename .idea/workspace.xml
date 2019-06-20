@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a05d1cc6-3da2-4d71-90ea-6acb4237eb26" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.docx" beforeDir="false" afterPath="$PROJECT_DIR$/config.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rename.py" beforeDir="false" afterPath="$PROJECT_DIR$/Misc/rename.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script_daily.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_daily.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script_weekly.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_weekly.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,14 +12,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/script_weekly.py">
+        <entry file="file://$PROJECT_DIR$/script_daily.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+            <state relative-caret-position="651">
+              <caret line="89" column="30" lean-forward="true" selection-start-line="89" selection-start-column="30" selection-end-line="89" selection-end-column="30" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,8 +76,8 @@
         <option value="$PROJECT_DIR$/all_in_one_script.py" />
         <option value="$PROJECT_DIR$/rename.py" />
         <option value="$PROJECT_DIR$/all.py" />
-        <option value="$PROJECT_DIR$/script_daily.py" />
         <option value="$PROJECT_DIR$/script_weekly.py" />
+        <option value="$PROJECT_DIR$/script_daily.py" />
       </list>
     </option>
   </component>
@@ -134,7 +131,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.script_weekly">
+  <component name="RunManager" selected="Python.script_daily">
     <configuration name="all" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="first_python_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -242,8 +239,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.script_weekly" />
         <item itemvalue="Python.script_daily" />
+        <item itemvalue="Python.script_weekly" />
         <item itemvalue="Python.all" />
         <item itemvalue="Python.rename" />
         <item itemvalue="Python.update (1)" />
@@ -338,18 +335,26 @@
       <option name="project" value="LOCAL" />
       <updated>1560940906636</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Daily OK. Weekly - problems with folders and file creation.">
+      <created>1560960134039</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1560960134039</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4954955" visible="true" weight="0.18665607" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4954955" visible="true" weight="0.18665607" />
       <window_info id="Structure" order="1" sideWeight="0.5045045" side_tool="true" weight="0.18665607" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3280142" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993395" visible="true" weight="0.39716312" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993395" weight="0.39716312" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.48049647" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -394,18 +399,8 @@
     <MESSAGE value="Separate scripts for daily and weekly (in progress)." />
     <MESSAGE value="Separate scripts for daily and weekly (in progress). Some additions." />
     <MESSAGE value="Weekly scripts needs to be finished." />
-    <option name="LAST_COMMIT_MESSAGE" value="Weekly scripts needs to be finished." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/script_weekly.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Daily OK. Weekly - problems with folders and file creation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Daily OK. Weekly - problems with folders and file creation." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pandas/io/excel.py" />
@@ -431,7 +426,7 @@
     <entry file="file://$PROJECT_DIR$/../all_in_one_script/Misc/drop_all_add_date.py" />
     <entry file="file://$PROJECT_DIR$/../all_in_one_script/update.py" />
     <entry file="file://$PROJECT_DIR$/update.py" />
-    <entry file="file://$PROJECT_DIR$/Misc/source_output_skip.py">
+    <entry file="file://$PROJECT_DIR$/misc/source_output_skip.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
@@ -454,13 +449,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/all.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/pathlib.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -468,7 +457,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Misc/rename.py">
+    <entry file="file://$PROJECT_DIR$/misc/rename.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
@@ -485,22 +474,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/script_daily.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="86" selection-start-line="86" selection-end-line="89" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="172">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/urllib/parse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="781" selection-start-line="781" selection-end-line="781" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/zipfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="1186" selection-start-line="1186" selection-end-line="1186" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/script_weekly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="30" column="56" selection-start-line="30" selection-start-column="56" selection-end-line="30" selection-end-column="56" />
+        <state relative-caret-position="-39">
+          <caret line="26" column="46" lean-forward="true" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/script_daily.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="89" column="30" lean-forward="true" selection-start-line="89" selection-start-column="30" selection-end-line="89" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
