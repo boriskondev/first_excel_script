@@ -30,7 +30,6 @@ for week_folder in weekly_source_path.glob("*"):
     if int(week_folder.name.split(".")[0]) == week_to_process:
         for file in week_folder.iterdir():
             if file.suffix == ".xlsx":
-
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
                 duplicates = all_data_frame[all_data_frame.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"], keep="first")]
                 all_data_frame.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"], keep="first", inplace=True)
