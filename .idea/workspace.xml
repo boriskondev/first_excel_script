@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a05d1cc6-3da2-4d71-90ea-6acb4237eb26" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/to_add.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/first_python_script.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lottery_script.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.docx" beforeDir="false" afterPath="$PROJECT_DIR$/config.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_weekly.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_weekly.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/to_add.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,33 +16,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/script_daily.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/to_add.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="50" selection-start-column="50" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/script_weekly.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="-368">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -97,10 +80,10 @@
         <option value="$PROJECT_DIR$/all_in_one_script.py" />
         <option value="$PROJECT_DIR$/rename.py" />
         <option value="$PROJECT_DIR$/all.py" />
-        <option value="$PROJECT_DIR$/script_weekly.py" />
         <option value="$PROJECT_DIR$/script_daily.py" />
         <option value="$PROJECT_DIR$/сфасфас.py" />
         <option value="$PROJECT_DIR$/to_add.py" />
+        <option value="$PROJECT_DIR$/script_weekly.py" />
       </list>
     </option>
   </component>
@@ -122,8 +105,8 @@
         <subPane>
           <expand>
             <path>
-              <item name="first_python_script" type="b2602c69:ProjectViewProjectNode" />
-              <item name="first_python_script" type="462c0819:PsiDirectoryNode" />
+              <item name="lottery_script" type="b2602c69:ProjectViewProjectNode" />
+              <item name="lottery_script" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -154,9 +137,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.сфасфас">
+  <component name="RunManager" selected="Python.script_weekly">
     <configuration name="сфасфас" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="first_python_script" />
+      <module name="lottery_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -177,7 +160,7 @@
       <method v="2" />
     </configuration>
     <configuration name="all" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="first_python_script" />
+      <module name="lottery_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -198,7 +181,7 @@
       <method v="2" />
     </configuration>
     <configuration name="rename" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="first_python_script" />
+      <module name="lottery_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -219,7 +202,7 @@
       <method v="2" />
     </configuration>
     <configuration name="script_daily" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="first_python_script" />
+      <module name="lottery_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -240,7 +223,7 @@
       <method v="2" />
     </configuration>
     <configuration name="script_weekly" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="first_python_script" />
+      <module name="lottery_script" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -262,8 +245,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.сфасфас" />
         <item itemvalue="Python.script_weekly" />
+        <item itemvalue="Python.сфасфас" />
         <item itemvalue="Python.script_daily" />
         <item itemvalue="Python.all" />
         <item itemvalue="Python.rename" />
@@ -372,20 +355,26 @@
       <option name="project" value="LOCAL" />
       <updated>1561042897572</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Remove duplicates in separate file, TBA.">
+      <created>1564409756531</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1564409756531</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4954955" visible="true" weight="0.18665607" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4954955" visible="true" weight="0.18665607" />
       <window_info id="Structure" order="1" sideWeight="0.5045045" side_tool="true" weight="0.18665607" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3280142" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993395" weight="0.39716312" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.48049647" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4993395" visible="true" weight="0.69148934" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4113475" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -431,7 +420,8 @@
     <MESSAGE value="Weekly scripts needs to be finished." />
     <MESSAGE value="Daily OK. Weekly - problems with folders and file creation." />
     <MESSAGE value="Both working fine. Descriptions to be added at some point." />
-    <option name="LAST_COMMIT_MESSAGE" value="Both working fine. Descriptions to be added at some point." />
+    <MESSAGE value="Remove duplicates in separate file, TBA." />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove duplicates in separate file, TBA." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pandas/io/excel.py" />
@@ -527,9 +517,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/сфасфас.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pandas/core/frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4682" selection-start-line="4682" selection-end-line="4682" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/to_add.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="8" column="59" lean-forward="true" selection-start-line="8" selection-start-column="59" selection-end-line="8" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/script_daily.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
+        <state relative-caret-position="1840">
           <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
@@ -537,17 +541,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/to_add.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="50" selection-start-column="50" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/script_weekly.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        <state relative-caret-position="-368">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
