@@ -19,15 +19,8 @@ reserves_to_draw = int(input("Reserves: "))
 
 entries_to_sample = winners_to_draw + reserves_to_draw
 
-if week_to_process < 10:
-    if not os.path.exists(f"Week_0{week_to_process}"):
-        os.makedirs(f"Week_0{week_to_process}")
-else:
-    if not os.path.exists(f"Week_{week_to_process}"):
-        os.makedirs(f"Week_{week_to_process}")
-
 for week_folder in weekly_source_path.glob("*"):
-    if int(week_folder.name.split(".")[0]) == week_to_process:
+    if week_folder.name != "Results" and int(week_folder.name.split(".")[0]) == week_to_process:
         for file in week_folder.iterdir():
             if file.suffix == ".xlsx":
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
@@ -39,10 +32,14 @@ for week_folder in weekly_source_path.glob("*"):
                 whole_week = week_folder.name.split()[1]
 
                 if week_to_process < 10:
-                    weekly_winners = f"Week_0{week_to_process}/Winners_{whole_week}.xlsx"
-                    weekly_duplicates = f"Week_0{week_to_process}/Duplicates_{whole_week}.xlsx"
-                    weekly_no_duplicates = f"Week_0{week_to_process}/All_without_duplicates_{whole_week}.xlsx"
+                    if not os.path.exists(f"Week_0{week_to_process}"):
+                        os.makedirs(f"Week_0{week_to_process}")
+                    weekly_winners = f"Week_0{week_to_process}/Week_{whole_week}_winners.xlsx"
+                    weekly_duplicates = f"Week_0{week_to_process}/Week_{whole_week}_duplicates.xlsx"
+                    weekly_no_duplicates = f"Week_0{week_to_process}/Week_{whole_week}_no_duplicates.xlsx"
                 else:
+                    if not os.path.exists(f"Week_{week_to_process}"):
+                        os.makedirs(f"Week_{week_to_process}")
                     weekly_winners = f"Week_{week_to_process}/Winners_{whole_week}.xlsx"
                     weekly_duplicates = f"Week_{week_to_process}/Duplicates_{whole_week}.xlsx"
                     weekly_no_duplicates = f"Week_{week_to_process}/All_without_duplicates_{whole_week}.xlsx"
