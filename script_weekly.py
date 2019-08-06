@@ -3,6 +3,7 @@ from datetime import datetime
 import pandas as pd
 from pathlib import Path
 import os
+import yaml
 
 time_start = datetime.now()
 
@@ -10,6 +11,7 @@ project_config = docx.Document("config.docx")
 
 weekly_source_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"", ""))
 output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"",""))
+banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].replace("\"",""))
 
 os.chdir(output_path)
 
@@ -24,6 +26,7 @@ for week_folder in weekly_source_path.glob("*"):
         for file in week_folder.iterdir():
             if file.suffix == ".xlsx":
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
+                all_data_frame["Банка*:"] = all_data_frame["Банка*:"].str.strip()
                 duplicates = all_data_frame[all_data_frame.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"], keep="first")]
                 all_data_frame.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"], keep="first", inplace=True)
 
@@ -46,16 +49,24 @@ for week_folder in weekly_source_path.glob("*"):
 
                 if os.path.exists(weekly_winners):
                     os.remove(weekly_winners)
-
                 if os.path.exists(weekly_duplicates):
                     os.remove(weekly_duplicates)
-
                 if os.path.exists(weekly_no_duplicates):
                     os.remove(weekly_no_duplicates)
 
                 winners_data_frame.to_excel(weekly_winners, index=False)
                 duplicates.to_excel(weekly_duplicates, index=False)
                 all_data_frame.to_excel(weekly_no_duplicates, index=False)
+
+                banks_list = winners_data_frame["Банка*:"].unique()
+
+                for bank in banks_list:
+                    win_bank_data_frame = winners_data_frame[winners_data_frame["Банка*:"] == bank]
+                    bank_name = banks_names[bank]
+                    win_bank_file = f"Week_{week_to_process}_winner_{bank_name}.xlsx"
+                    if os.path.isfile(win_bank_file):
+                        os.remove(win_bank_file)
+                    win_bank_data_frame.to_excel(win_bank_file, index=False)
 
 time_end = datetime.now()
 time_took = time_end - time_start
