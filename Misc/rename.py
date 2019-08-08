@@ -3,7 +3,7 @@ import pandas as pd
 import docx
 import yaml
 
-rename_folder = Path("C:/Users/pmg23_b.kondev/Desktop/Python/first_python_script/Rename")
+rename_folder = Path("C:/Users/pmg23_b.kondev/Desktop/Python/lottery_script/Rename")
 
 project_config = docx.Document("config.docx")
 
