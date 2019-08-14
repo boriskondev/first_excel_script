@@ -10,8 +10,8 @@ time_start = datetime.now()
 project_config = docx.Document("config.docx")
 
 weekly_source_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"", ""))
-output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"",""))
-banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].replace("\"",""))
+output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))
+banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].replace("\"", ""))
 
 os.chdir(output_path)
 
@@ -26,26 +26,28 @@ for week_folder in weekly_source_path.glob("*"):
         for file in week_folder.iterdir():
             if file.suffix == ".xlsx":
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
-                all_data_frame["Банка*:"] = all_data_frame["Банка*:"].str.strip()
-                duplicates = all_data_frame[all_data_frame.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"], keep="first")]
-                all_data_frame.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"], keep="first", inplace=True)
+                all_data_frame.columns = all_data_frame.columns.str.strip()
+                duplicates = all_data_frame[
+                    all_data_frame.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"],
+                                              keep="first")]
+                all_data_frame.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"],
+                                               keep="first", inplace=True)
 
                 winners_data_frame = all_data_frame.sample(n=entries_to_sample)
 
                 whole_week = week_folder.name.split()[1]
 
                 if week_to_process < 10:
-                    if not os.path.exists(f"Week_0{week_to_process}"):
-                        os.makedirs(f"Week_0{week_to_process}")
-                    weekly_winners = f"Week_0{week_to_process}/Week_{whole_week}_winners.xlsx"
-                    weekly_duplicates = f"Week_0{week_to_process}/Week_{whole_week}_duplicates.xlsx"
-                    weekly_no_duplicates = f"Week_0{week_to_process}/Week_{whole_week}_no_duplicates.xlsx"
-                else:
-                    if not os.path.exists(f"Week_{week_to_process}"):
-                        os.makedirs(f"Week_{week_to_process}")
-                    weekly_winners = f"Week_{week_to_process}/Winners_{whole_week}.xlsx"
-                    weekly_duplicates = f"Week_{week_to_process}/Duplicates_{whole_week}.xlsx"
-                    weekly_no_duplicates = f"Week_{week_to_process}/All_without_duplicates_{whole_week}.xlsx"
+                    week_to_process = "0" + str(week_to_process)
+
+                if not os.path.exists(f"Week_{week_to_process}"):
+                    os.makedirs(f"Week_{week_to_process}")
+                if not os.path.exists(f"Week_{week_to_process}/Banks"):
+                    os.makedirs(f"Week_{week_to_process}/Banks")
+
+                weekly_winners = f"Week_{week_to_process}/Week_{whole_week}_winners.xlsx"
+                weekly_duplicates = f"Week_{week_to_process}/Week_{whole_week}_duplicates.xlsx"
+                weekly_no_duplicates = f"Week_{week_to_process}/Week_{whole_week}_no_duplicates.xlsx"
 
                 if os.path.exists(weekly_winners):
                     os.remove(weekly_winners)
@@ -57,6 +59,8 @@ for week_folder in weekly_source_path.glob("*"):
                 winners_data_frame.to_excel(weekly_winners, index=False)
                 duplicates.to_excel(weekly_duplicates, index=False)
                 all_data_frame.to_excel(weekly_no_duplicates, index=False)
+
+                os.chdir(Path(os.path.join(os.getcwd(), f"Week_{week_to_process}", "Banks")))
 
                 banks_list = winners_data_frame["Банка*:"].unique()
 
@@ -72,3 +76,5 @@ time_end = datetime.now()
 time_took = time_end - time_start
 
 print(f"The execution of this script took {time_took.seconds} seconds.")
+
+
