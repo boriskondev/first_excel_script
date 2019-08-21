@@ -27,10 +27,11 @@ for week_folder in weekly_source_path.glob("*"):
             if file.suffix == ".xlsx":
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
                 all_data_frame.columns = all_data_frame.columns.str.strip()
+                # Removing duplicates only by one criteria (not comited)
                 duplicates_data_drame = all_data_frame[
-                    all_data_frame.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"],
+                    all_data_frame.duplicated(["Отор. код на ПОС бележка*:"],
                                               keep="first")]
-                all_data_frame.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:", "Дата на ПОС плащане*:"],
+                all_data_frame.drop_duplicates(["Отор. код на ПОС бележка*:"],
                                                keep="first", inplace=True)
 
                 all_drawn_data_frame = all_data_frame.sample(n=entries_to_sample)
