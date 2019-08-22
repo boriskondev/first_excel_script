@@ -13,6 +13,10 @@ weekly_source_path = Path(project_config.paragraphs[1].text.split("=")[1].replac
 output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))
 banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].replace("\"", ""))
 
+codes_to_remove = ["АВТ.КОД/АС:", "Авт. код: ", "Авт. код ", "Авт.код :", "Авт. код. ", "АВТ. КОД/ ", "АВТ.КОД/AC:",
+                   "AUTH.CODE:", "AUTH CODE:", "Auth. Code ", "PRE-AUTH ", "ACC", "AC:", "АС:", "AC :", "АС :", "AC: ",
+                   "AC", "АС", "AС", "АC", "AC ", "ac ", "Ас ", "ac", "Ac", "tid "]
+
 os.chdir(output_path)
 
 week_to_process = int(input("Week to process: "))
@@ -27,11 +31,16 @@ for week_folder in weekly_source_path.glob("*"):
             if file.suffix == ".xlsx":
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
                 all_data_frame.columns = all_data_frame.columns.str.strip()
-                # Removing duplicates only by one criteria (not comited)
-                duplicates_data_drame = all_data_frame[
-                    all_data_frame.duplicated(["Отор. код на ПОС бележка*:"],
+                all_data_frame["Име*:"] = all_data_frame["Име*:"].str.strip()
+
+                for code in codes_to_remove:
+                    all_data_frame["Отор. код на ПОС бележка*:"] = [x.strip().replace(code, '').strip() for x in
+                                                                    all_data_frame["Отор. код на ПОС бележка*:"]]
+
+                duplicates_data_frame = all_data_frame[
+                    all_data_frame.duplicated(["Отор. код на ПОС бележка*:", "Име*:"],
                                               keep="first")]
-                all_data_frame.drop_duplicates(["Отор. код на ПОС бележка*:"],
+                all_data_frame.drop_duplicates(["Отор. код на ПОС бележка*:", "Име*:"],
                                                keep="first", inplace=True)
 
                 all_drawn_data_frame = all_data_frame.sample(n=entries_to_sample)
@@ -67,7 +76,7 @@ for week_folder in weekly_source_path.glob("*"):
 
                 winners_data_frame.to_excel(weekly_winners, index=False)
                 reserves_data_frame.to_excel(weekly_reserves, index=False)
-                duplicates_data_drame.to_excel(weekly_duplicates, index=False)
+                duplicates_data_frame.to_excel(weekly_duplicates, index=False)
                 all_data_frame.to_excel(weekly_no_duplicates, index=False)
 
                 os.chdir(Path(os.path.join(os.getcwd(), f"Week_{week_to_process}", "Banks")))
