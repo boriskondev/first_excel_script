@@ -14,7 +14,7 @@ folder = Path("C:/Users/pmg23_b.kondev/Desktop/Results/Week_01/Banks")
 
 week_to_process = int(input("Week to process: "))
 password = input("Email password: ")
-sender_email = "pythonemailtests@gmail.com"
+sender_email = "emails.tasting@gmail.com"
 
 time_start = datetime.now()
 
