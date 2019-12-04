@@ -15,6 +15,7 @@ folder = Path("C:/Users/pmg23_b.kondev/Desktop/Results/Week_01/Banks")
 week_to_process = int(input("Week to process: "))
 password = input("Email password: ")
 sender_email = "emails.tasting@gmail.com"
+cc_email = "emails.tasting@gmail.com"
 
 time_start = datetime.now()
 
@@ -31,7 +32,7 @@ for bank, name, family, email in reader:
             message["Subject"] = f"Visa winter promotion 2019 {winner_or_winners}, week {week_to_process}"
             message["From"] = sender_email
             message["To"] = email
-            message["Cc"] = sender_email
+            message["Cc"] = cc_email
 
             if winner_or_winners == "winner":
                 simple_explanation = f"\nПриложено изпращам печелившия ви за тази седмица." \
