@@ -15,7 +15,7 @@ banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].rep
 
 codes_to_remove = ["АВТ.КОД/АС:", "Авт. код: ", "Авт. код ", "Авт.код :", "Авт. код. ", "АВТ. КОД/ ", "АВТ.КОД/AC:",
                    "AUTH.CODE:", "AUTH CODE:", "Auth. Code ", "PRE-AUTH ", "ACC", "AC:", "АС:", "AC :", "АС :", "AC: ",
-                   "AC", "АС", "AС", "АC", "AC ", "ac ", "Ас ", "ac", "Ac", "tid "]
+                   "AC", "АС", "AС", "АC", "AC ", "ac ", "Ас ", "ac", "Ac", "tid ", "Авт.код:"]
 
 os.chdir(output_path)
 
@@ -25,9 +25,9 @@ reserves_to_draw = int(input("Reserves: "))
 
 entries_to_sample = winners_to_draw + reserves_to_draw
 
-for week_folder in weekly_source_path.glob("*"):
-    if week_folder.name != "Results" and int(week_folder.name.split(".")[0]) == week_to_process:
-        for file in week_folder.iterdir():
+for weekly_folder_element in weekly_source_path.glob("*"):
+    if os.path.isdir(weekly_folder_element) and weekly_folder_element.name != "_Results" and int(weekly_folder_element.name.split(".")[0]) == week_to_process:
+        for file in weekly_folder_element.iterdir():
             if file.suffix == ".xlsx":
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
                 all_data_frame.columns = all_data_frame.columns.str.strip()
@@ -38,14 +38,14 @@ for week_folder in weekly_source_path.glob("*"):
                                                                     all_data_frame["Отор. код на ПОС бележка*:"]]
 
                 duplicates_data_frame = all_data_frame[
-                    all_data_frame.duplicated(["Отор. код на ПОС бележка*:", "Име*:"],
+                    all_data_frame.duplicated(["Отор. код на ПОС бележка*:", "Имейл*:"],
                                               keep="first")]
-                all_data_frame.drop_duplicates(["Отор. код на ПОС бележка*:", "Име*:"],
+                all_data_frame.drop_duplicates(["Отор. код на ПОС бележка*:", "Имейл*:"],
                                                keep="first", inplace=True)
 
                 all_drawn_data_frame = all_data_frame.sample(n=entries_to_sample)
 
-                whole_week = week_folder.name.split()[1]
+                whole_week = weekly_folder_element.name.split()[1]
 
                 if week_to_process < 10:
                     week_to_process = "0" + str(week_to_process)
