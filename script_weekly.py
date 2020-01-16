@@ -15,7 +15,7 @@ banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].rep
 
 codes_to_remove = ["АВТ.КОД/АС:", "Авт. код: ", "Авт. код ", "Авт.код :", "Авт. код. ", "АВТ. КОД/ ", "АВТ.КОД/AC:",
                    "AUTH.CODE:", "AUTH CODE:", "Auth. Code ", "PRE-AUTH ", "ACC", "AC:", "АС:", "AC :", "АС :", "AC: ",
-                   "AC", "АС", "AС", "АC", "AC ", "ac ", "Ас ", "ac", "Ac", "tid ", "Авт.код:"]
+                   "AC", "АС", "AС", "АC", "AC ", "ac ", "Ас ", "ac", "Ac", "tid ", "Авт.код:", ]
 
 os.chdir(output_path)
 
@@ -34,8 +34,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 all_data_frame["Име*:"] = all_data_frame["Име*:"].str.strip()
 
                 for code in codes_to_remove:
-                    all_data_frame["Отор. код на ПОС бележка*:"] = [x.strip().replace(code, '').strip() for x in
-                                                                    all_data_frame["Отор. код на ПОС бележка*:"]]
+                    all_data_frame["Отор. код на ПОС бележка*:"] = [x.strip().replace(code, '').strip() for x in all_data_frame["Отор. код на ПОС бележка*:"]]
 
                 duplicates_data_frame = all_data_frame[
                     all_data_frame.duplicated(["Отор. код на ПОС бележка*:", "Имейл*:"],
