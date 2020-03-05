@@ -13,9 +13,13 @@ weekly_source_path = Path(project_config.paragraphs[1].text.split("=")[1].replac
 output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))
 banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].replace("\"", ""))
 
-codes_to_remove = ["АВТ.КОД/АС:", "Авт. код: ", "Авт. код ", "Авт.код :", "Авт. код. ", "АВТ. КОД/ ", "АВТ.КОД/AC:",
-                   "AUTH.CODE:", "AUTH CODE:", "Auth. Code ", "PRE-AUTH ", "ACC", "AC:", "АС:", "AC :", "АС :", "AC: ",
-                   "AC", "АС", "AС", "АC", "AC ", "ac ", "Ас ", "ac", "Ac", "tid ", "Авт.код:", ]
+codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 'Авт. Код : ', 'АВТ.КОД/АС:', 'ACC',
+                   'AUTH CODE:', 'АВТОМ.КОД: ', 'АВТ. КОД: ', 'Авт.код', 'авт.код.', 'autn. Code', 'AC: ', 'ac ',
+                   'tid ', 'AUTH.CODE : ', 'Авт. Код:', 'Авт. Код: ', 'AUTH. CODE:', 'Auth.code:', 'AUTH. CODE',
+                   'Авт. код: ', 'Auth.code ', 'AC:', 'АC', 'АС:', 'АВТ КОД ', 'AUTH. CODE: ', 'Авт.код:', 'АВТ.КОД',
+                   'АВТ.КОД. ', 'Авт. код. ', 'АВТ КОД', 'АВТ.КОД: ', 'AC', 'Auth. Code ', 'AС', 'авт. Код', 'АВТ. КОД:',
+                   'Авт. код ', 'GPA.', 'АВТ.КОД:', 'авт. код ', 'AC :', 'Авт.код ', 'Ас ', 'АВТ. КОД/ ', 'PRE-AUTH ',
+                   'Авт. Код ', 'авт.код:', 'АВТ.КОД/AC:', 'Авт.код :', 'АС', 'Авт. код/ ']
 
 os.chdir(output_path)
 
