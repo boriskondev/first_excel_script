@@ -42,8 +42,8 @@ for weekly_folder_element in weekly_source_path.glob("*"):
 
                 whole_week = weekly_folder_element.name.split()[1]
 
-                weekly_duplicates = f"Week_{whole_week}_duplicates.xlsx"
-                weekly_no_duplicates = f"Week_{whole_week}_no_duplicates.xlsx"
+                weekly_duplicates = f"Week_{whole_week}_only_duplicates.xlsx"
+                weekly_no_duplicates = f"Week_{whole_week}_without_duplicates.xlsx"
                 weekly_fifths = f"Week_{whole_week}_fifths.xlsx"
 
                 files = [weekly_duplicates, weekly_no_duplicates, weekly_fifths]
@@ -73,3 +73,5 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 print(all_fifths.shape)
 
 print("Done!")
+
+# TO SPLIT THE DATES IN THE SHEETS!
