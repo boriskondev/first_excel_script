@@ -19,7 +19,7 @@ codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 
 
 os.chdir(output_path)
 
-week_to_process = 1
+week_to_process = 2
 
 for weekly_folder_element in weekly_source_path.glob("*"):
     if os.path.isdir(weekly_folder_element) and weekly_folder_element.name != "_Results" \
@@ -33,6 +33,8 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 for code in codes_to_remove:
                     all_data_frame["Transaction Code"] = \
                         [x.strip().replace(code, '').strip() for x in all_data_frame["Transaction Code"]]
+
+                print(all_data_frame.shape)
 
                 duplicates_data_frame = all_data_frame[
                     all_data_frame.duplicated(["Firstname", "Transaction Code"],
