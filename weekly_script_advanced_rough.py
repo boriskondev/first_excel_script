@@ -19,7 +19,7 @@ codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 
 
 os.chdir(output_path)
 
-week_to_process = 2
+week_to_process = 1
 
 for weekly_folder_element in weekly_source_path.glob("*"):
     if os.path.isdir(weekly_folder_element) and weekly_folder_element.name != "_Results" \
@@ -29,6 +29,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
                 all_data_frame.columns = all_data_frame.columns.str.strip()
                 all_data_frame["Firstname"] = all_data_frame["Firstname"].str.strip()
+                all_data_frame["Reg_date"], all_data_frame["Reg_time"] = all_data_frame["Submitted date"].str.split(" ").str
 
                 for code in codes_to_remove:
                     all_data_frame["Transaction Code"] = \
@@ -48,17 +49,25 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 weekly_no_duplicates = f"Week_{whole_week}_without_duplicates.xlsx"
                 weekly_fifths = f"Week_{whole_week}_fifths.xlsx"
 
-                files = [weekly_duplicates, weekly_no_duplicates, weekly_fifths]
+                current_files = [weekly_duplicates, weekly_no_duplicates, weekly_fifths]
 
-                for f in files:
-                    if os.path.exists(f):
-                        os.remove(f)
+                for current_file in current_files:
+                    if os.path.exists(current_file):
+                        os.remove(current_file)
 
                 duplicates_data_frame.to_excel(weekly_duplicates, index=False)
                 all_data_frame.to_excel(weekly_no_duplicates, index=False)
 
-                all_fifths = pd.DataFrame()
+                # Daily prizes logic
+                days_of_week = all_data_frame["Reg_date"].unique()
+                writer = pd.ExcelWriter(f"Week_{whole_week}_daily.xlsx", engine="xlsxwriter")
+                for day in days_of_week:
+                    day_df = all_data_frame[all_data_frame["Reg_date"] == day]
+                    day_df.to_excel(writer, sheet_name=day, index=False)
+                writer.save()
 
+                # Weekly prize logic
+                all_fifths = pd.DataFrame()
                 all_data_frame["Email address (Personal)"] = all_data_frame["Email address (Personal)"].str.strip()
                 emails_list = all_data_frame["Email address (Personal)"].unique()
                 print(len(emails_list))
