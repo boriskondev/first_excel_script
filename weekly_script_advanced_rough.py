@@ -26,9 +26,12 @@ for weekly_folder_element in weekly_source_path.glob("*"):
             and int(weekly_folder_element.name.split(".")[0]) == week_to_process:
         for file in weekly_folder_element.iterdir():
             if file.suffix == ".xlsx":
+                
                 all_data_frame = pd.read_excel(file, sheet_name=0, skiprows=None)
                 all_data_frame.columns = all_data_frame.columns.str.strip()
-                all_data_frame["Firstname"] = all_data_frame["Firstname"].str.strip()
+                for column in all_data_frame.columns:
+                    all_data_frame[column] = all_data_frame[column].astype('str').str.strip()
+
                 all_data_frame["Reg_date"], all_data_frame["Reg_time"] = all_data_frame["Submitted date"].str.split(" ").str
 
                 for code in codes_to_remove:
