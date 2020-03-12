@@ -4,6 +4,7 @@ import docx
 import pandas as pd
 import os
 import numpy as np
+import yaml
 
 time_start = datetime.now()
 
@@ -11,6 +12,7 @@ project_config = docx.Document("config.docx")
 
 weekly_source_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"", ""))
 output_path = Path(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))
+banks_names = yaml.safe_load(project_config.paragraphs[5].text.split("=")[1].replace("\"", ""))
 
 codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 'Авт. Код : ', 'АВТ.КОД/АС:', 'ACC', 'AUTH CODE:',
                    'АВТОМ.КОД: ', 'АВТ. КОД: ', 'Авт.код', 'авт.код.', 'autn. Code', 'AC: ', 'ac ', 'tid ', 'AUTH.CODE : ',
@@ -22,7 +24,7 @@ codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 
 
 os.chdir(output_path)
 
-week_to_process = 1
+week_to_process = 3
 daily_winners = 5
 daily_reserves = 5
 weekly_winners = 1
@@ -146,6 +148,27 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 all_winners_file = f"Week_{whole_week}_all_winners.xlsx"
                 all_winners_df = weekly_winners_df.append(all_daily_winners_df)
                 all_winners_df.to_excel(all_winners_file, index=False)
+
+                # Create folder and files for banks
+                for_banks_folder = "For banks"
+
+                if not os.path.exists(for_banks_folder):
+                    os.makedirs(for_banks_folder)
+
+                os.chdir(for_banks_folder)
+
+                banks_list = all_winners_df["Bank"].unique()
+
+                for bank in banks_list:
+                    win_bank_data_frame = all_winners_df[all_winners_df["Bank"] == bank]
+                    bank_name = banks_names[bank]
+                    if win_bank_data_frame.shape[0] == 1:
+                        win_bank_file = f"Week_{whole_week}_winner_{bank_name}.xlsx"
+                    else:
+                        win_bank_file = f"Week_{whole_week}_winners_{bank_name}.xlsx"
+                    if os.path.isfile(win_bank_file):
+                        os.remove(win_bank_file)
+                    win_bank_data_frame.to_excel(win_bank_file, index=False)
 
 time_end = datetime.now()
 time_took = time_end - time_start
