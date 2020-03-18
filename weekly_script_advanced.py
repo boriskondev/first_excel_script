@@ -22,13 +22,15 @@ codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 
                    'AC :', 'Авт.код ', 'Ас ', 'АВТ. КОД/ ', 'PRE-AUTH ', 'Авт. Код ', 'авт.код:', 'АВТ.КОД/AC:', 'Авт.код :',
                    'АС', 'Авт. код/ ']
 
-os.chdir(output_path)
+statistics = []
 
 week_to_process = 3
 daily_winners = 5
 daily_reserves = 5
 weekly_winners = 1
 weekly_reserves = 5
+
+os.chdir(output_path)
 
 for weekly_folder_element in weekly_source_path.glob("*"):
     if os.path.isdir(weekly_folder_element) and weekly_folder_element.name != "_Results" \
@@ -46,7 +48,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 for code in codes_to_remove:
                     all_df["Transaction Code"] = [x.strip().replace(code, '').strip() for x in all_df["Transaction Code"]]
 
-                print(f"Total entries: {all_df.shape[0]}")
+                statistics.append(f"Total entries: {all_df.shape[0]}")
 
                 duplicates_df = all_df[all_df.duplicated(["Firstname", "Transaction Code"], keep="first")]
                 all_df.drop_duplicates(["Firstname", "Transaction Code"], keep="first", inplace=True)
@@ -79,15 +81,15 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                         os.remove(current_file)
 
                 duplicates_df.to_excel(weekly_duplicates, index=False)
-                print(f"Duplicates: {duplicates_df.shape[0]}")
+                statistics.append(f"Duplicates: {duplicates_df.shape[0]}")
                 all_df.to_excel(weekly_no_duplicates, index=False)
-                print(f"Entries without duplicates: {all_df.shape[0]}")
+                statistics.append(f"Entries without duplicates: {all_df.shape[0]}")
 
                 # Weekly prize/s logic
                 fifths_df = pd.DataFrame()
                 all_df["Email address (Personal)"] = all_df["Email address (Personal)"].str.strip()
                 emails_list = all_df["Email address (Personal)"].unique()
-                print(f"Unique emails: {len(emails_list)}")
+                statistics.append(f"Unique emails: {len(emails_list)}")
 
                 for email in emails_list:
                     all_selected = all_df[all_df["Email address (Personal)"] == email]
@@ -97,7 +99,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
 
                 fifths_df.to_excel(weekly_fifths, index=False)
 
-                os.chdir('../../')
+                os.chdir("../../")
                 os.chdir(weekly_winners_folder)
 
                 writer = pd.ExcelWriter(f"Week_{whole_week}_weekly_winners_and_reserves.xlsx", engine="xlsxwriter")
@@ -114,8 +116,8 @@ for weekly_folder_element in weekly_source_path.glob("*"):
 
                 writer.save()
 
-                print(f"Weekly prize entries: {fifths_df.shape[0]}")
-                print(f"Weekly prize unique emails: {len(fifths_df['Email address (Personal)'].unique())}")
+                statistics.append(f"Weekly prize entries: {fifths_df.shape[0]}")
+                statistics.append(f"Weekly prize unique emails: {len(fifths_df['Email address (Personal)'].unique())}")
 
                 # Daily prizes logic
                 all_daily_winners, all_daily_reserves = [], []
@@ -126,7 +128,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
 
                 for day in days_of_week:
                     daily_df = all_df[all_df["Reg_date"] == day]
-                    print(f"Entries for {day}: {daily_df.shape[0]}")
+                    statistics.append(f"Entries for {day}: {daily_df.shape[0]}")
                     daily_drawn_df = daily_df.sample(n=daily_winners+daily_reserves)
                     daily_drawn_df = daily_drawn_df.reset_index(drop=True)
                     daily_winners_df = daily_drawn_df.loc[0:(daily_winners - 1)]
@@ -170,8 +172,21 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                         os.remove(win_bank_file)
                     win_bank_data_frame.to_excel(win_bank_file, index=False)
 
+# Create weekly statistics file
+os.chdir("../../")
+
+weekly_stats_file = f"Week_{whole_week}_statistics.txt"
+if os.path.exists(weekly_stats_file):
+    os.remove(weekly_stats_file)
+
+with open(weekly_stats_file, "a+") as file:
+    for row in statistics:
+        print(row)
+        file.write(f"{row}\n")
+
 time_end = datetime.now()
 time_took = time_end - time_start
+
 print("Done!")
 print(f"The execution of this script took {time_took.seconds} seconds.")
 
