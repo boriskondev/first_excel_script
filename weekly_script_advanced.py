@@ -6,6 +6,13 @@ import os
 import numpy as np
 import yaml
 
+
+def append_and_print(data, li):
+    print(data)
+    li.append(data)
+    return li
+
+
 time_start = datetime.now()
 
 project_config = docx.Document("config.docx")
@@ -24,16 +31,18 @@ codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 
 
 statistics = []
 
-week_to_process = 3
+week_to_process = 4
 daily_winners = 5
 daily_reserves = 5
 weekly_winners = 1
 weekly_reserves = 5
 
+whole_week = ""
+
 os.chdir(output_path)
 
 for weekly_folder_element in weekly_source_path.glob("*"):
-    if os.path.isdir(weekly_folder_element) and weekly_folder_element.name != "_Results" \
+    if os.path.isdir(weekly_folder_element) and weekly_folder_element.name != "_Transfers" \
             and int(weekly_folder_element.name.split(".")[0]) == week_to_process:
         for file in weekly_folder_element.iterdir():
             if file.suffix == ".xlsx":
@@ -48,7 +57,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                 for code in codes_to_remove:
                     all_df["Transaction Code"] = [x.strip().replace(code, '').strip() for x in all_df["Transaction Code"]]
 
-                statistics.append(f"Total entries: {all_df.shape[0]}")
+                statistics = append_and_print(f"Total entries: {all_df.shape[0]}", statistics)
 
                 duplicates_df = all_df[all_df.duplicated(["Firstname", "Transaction Code"], keep="first")]
                 all_df.drop_duplicates(["Firstname", "Transaction Code"], keep="first", inplace=True)
@@ -81,15 +90,15 @@ for weekly_folder_element in weekly_source_path.glob("*"):
                         os.remove(current_file)
 
                 duplicates_df.to_excel(weekly_duplicates, index=False)
-                statistics.append(f"Duplicates: {duplicates_df.shape[0]}")
+                statistics = append_and_print(f"Duplicates: {duplicates_df.shape[0]}", statistics)
                 all_df.to_excel(weekly_no_duplicates, index=False)
-                statistics.append(f"Entries without duplicates: {all_df.shape[0]}")
+                statistics = append_and_print(f"Entries without duplicates: {all_df.shape[0]}", statistics)
 
                 # Weekly prize/s logic
                 fifths_df = pd.DataFrame()
                 all_df["Email address (Personal)"] = all_df["Email address (Personal)"].str.strip()
                 emails_list = all_df["Email address (Personal)"].unique()
-                statistics.append(f"Unique emails: {len(emails_list)}")
+                statistics = append_and_print(f"Unique emails: {len(emails_list)}", statistics)
 
                 for email in emails_list:
                     all_selected = all_df[all_df["Email address (Personal)"] == email]
@@ -116,8 +125,9 @@ for weekly_folder_element in weekly_source_path.glob("*"):
 
                 writer.save()
 
-                statistics.append(f"Weekly prize entries: {fifths_df.shape[0]}")
-                statistics.append(f"Weekly prize unique emails: {len(fifths_df['Email address (Personal)'].unique())}")
+                statistics = append_and_print(f"Weekly prize entries: {fifths_df.shape[0]}", statistics)
+                unique_emails_count = len(fifths_df['Email address (Personal)'].unique())
+                statistics = append_and_print(f"Weekly prize unique emails: {unique_emails_count}", statistics)
 
                 # Daily prizes logic
                 all_daily_winners, all_daily_reserves = [], []
@@ -128,7 +138,7 @@ for weekly_folder_element in weekly_source_path.glob("*"):
 
                 for day in days_of_week:
                     daily_df = all_df[all_df["Reg_date"] == day]
-                    statistics.append(f"Entries for {day}: {daily_df.shape[0]}")
+                    statistics = append_and_print(f"Entries for {day}: {daily_df.shape[0]}", statistics)
                     daily_drawn_df = daily_df.sample(n=daily_winners+daily_reserves)
                     daily_drawn_df = daily_drawn_df.reset_index(drop=True)
                     daily_winners_df = daily_drawn_df.loc[0:(daily_winners - 1)]
@@ -181,7 +191,6 @@ if os.path.exists(weekly_stats_file):
 
 with open(weekly_stats_file, "a+") as file:
     for row in statistics:
-        print(row)
         file.write(f"{row}\n")
 
 time_end = datetime.now()
