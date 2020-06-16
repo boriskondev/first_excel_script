@@ -31,7 +31,7 @@ codes_to_remove = ['AC ', 'ac', 'АС :', 'AUTH.CODE:', 'Ac', 'АВТ. КОД', 
 
 statistics = []
 
-week_to_process = 4
+week_to_process = 8
 daily_winners = 5
 daily_reserves = 5
 weekly_winners = 1
