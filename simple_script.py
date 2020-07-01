@@ -6,16 +6,17 @@ import os
 small_winners = 10000
 big_winners = 10
 
-input_file = ""
-output_all_submissions = "all_submissions.xlsx"
-output_winners_xlsx = "all_winners.xlsx"
-output_winners_txt = "winners.txt"
+input_file = ""  # Enter file name here
+output_all_submissions = "all_submissions_week2.xlsx"
+output_winners_xlsx = "all_winners_week2.xlsx"
+output_winners_txt = "winners_week2.txt"
 
-print("working on 1st sheet...")
+
 first_sheet = pd.read_excel(input_file, sheet_name=0, skiprows=None)
+print(f"working on 1st sheet with {first_sheet.shape[0]} entries inside...")
 
-print("working on 2nd sheet...")
 second_sheet = pd.read_excel(input_file, sheet_name=1, skiprows=None)
+print(f"working on 2nd sheet with {second_sheet.shape[0]} entries inside...")
 
 print("generating result...")
 total_submissions = pd.concat([first_sheet, second_sheet])
