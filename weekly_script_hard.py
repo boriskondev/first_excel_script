@@ -1,3 +1,5 @@
+# Previously named "weekly_script_advanced"
+
 from datetime import datetime
 from pathlib import Path
 import docx
