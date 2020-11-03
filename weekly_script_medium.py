@@ -6,22 +6,27 @@ import os
 import numpy as np
 import yaml
 
-# time_start = datetime.now()
+
+def append_and_print_statistics(data, li):
+    print(data)
+    li.append(data)
+    return li
+
+
+time_start = datetime.now()
 
 project_config = docx.Document("config_new.docx")
 
 source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"", ""))  # pathlib.WindowsPath
 output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"", ""))   # pathlib.WindowsPath
-banks_names = yaml.safe_load(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))  # dict
+banks_en_names = yaml.safe_load(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))  # dict
 codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replace("\"", "").split(", ")  # list
 
 statistics = []
 
 week_to_process = 1
-daily_winners = 5
-daily_reserves = 5
-weekly_winners = 1
-weekly_reserves = 5
+weekly_winners = 50
+weekly_reserves = 50
 
 whole_week = ""
 
@@ -38,4 +43,105 @@ for element in source_path.glob("*"):
                     all_df["Банка*:"] = all_df["Банка*:"].str.strip()
                     all_df["Reg_date"], all_df["Reg_time"] = all_df["Submitted date"].str.split(" ").str
 
-                    all_df.to_excel("test.xlsx", index=False)
+                    for code in codes_to_remove:
+                        all_df["Отор. код на ПОС бележка*:"] = \
+                            [x.strip().replace(code, "").strip() for x in all_df["Отор. код на ПОС бележка*:"]]
+
+                    statistics = append_and_print_statistics(f"Total registrations: {all_df.shape[0]}", statistics)
+
+                    duplicates_df = all_df[all_df.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:"], keep="first")]
+                    all_df.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:"], keep="first", inplace=True)
+
+                    whole_week = element.name.split()[1]
+
+                    if week_to_process < 10:
+                        week_to_process = "0" + str(week_to_process)
+
+                    weekly_folder = f"Week_{week_to_process}"
+                    weekly_processed_folder = f"Week_{week_to_process}/Processed files"
+                    weekly_winners_folder = f"Week_{week_to_process}/Winners"
+
+                    folders = [weekly_folder, weekly_processed_folder, weekly_winners_folder]
+
+                    for folder in folders:
+                        if not os.path.exists(folder):
+                            os.makedirs(folder)
+
+                    os.chdir(weekly_processed_folder)
+
+                    weekly_duplicates = f"Week_{whole_week}_duplicates.xlsx"
+                    weekly_without_duplicates = f"Week_{whole_week}_without_duplicates.xlsx"
+
+                    current_files = [weekly_duplicates, weekly_without_duplicates]
+
+                    for current_file in current_files:
+                        if os.path.exists(current_file):
+                            os.remove(current_file)
+
+                    duplicates_df.to_excel(weekly_duplicates, index=False)
+                    statistics = append_and_print_statistics(f"Duplicates: {duplicates_df.shape[0]}", statistics)
+
+                    all_df.to_excel(weekly_without_duplicates, index=False)
+                    statistics = append_and_print_statistics(f"Without duplicates: {all_df.shape[0]}", statistics)
+
+                    all_df["Имейл*:"] = all_df["Имейл*:"].str.strip()
+                    emails_list = all_df["Имейл*:"].unique()
+                    statistics = append_and_print_statistics(f"Unique emails: {len(emails_list)}", statistics)
+
+                    os.chdir("../../")
+                    os.chdir(weekly_winners_folder)
+
+                    writer = pd.ExcelWriter(f"Week_{whole_week}_winners_and_reserves.xlsx", engine="xlsxwriter")
+
+                    weekly_drawn_df = all_df.sample(n=weekly_winners + weekly_reserves)
+                    weekly_drawn_df = weekly_drawn_df.reset_index(drop=True)
+
+                    weekly_winners_df = weekly_drawn_df.loc[0:(weekly_winners - 1)]
+                    weekly_winners_df.insert(0, "Status", "Седмична награда")
+
+                    weekly_reserves_df = weekly_drawn_df.loc[weekly_winners:(weekly_winners + weekly_reserves - 1)]
+                    weekly_reserves_df.insert(0, "Status", "Седмична резерва")
+
+                    weekly_winners_df.to_excel(writer, sheet_name="Winners", index=False)
+                    weekly_reserves_df.to_excel(writer, sheet_name="Reserves", index=False)
+
+                    writer.save()
+
+                    winning_banks_folder = "For banks"
+
+                    if not os.path.exists(winning_banks_folder):
+                        os.makedirs(winning_banks_folder)
+
+                    os.chdir(winning_banks_folder)
+
+                    for bank in weekly_winners_df["Банка*:"].unique():
+
+                        winning_bank_df = weekly_winners_df[weekly_winners_df["Банка*:"] == bank]
+
+                        bank_name = banks_en_names[bank]
+
+                        if winning_bank_df.shape[0] == 1:
+                            win_bank_file = f"Week_{whole_week}_winner_{bank_name}.xlsx"
+                        else:
+                            win_bank_file = f"Week_{whole_week}_winners_{bank_name}.xlsx"
+
+                        if os.path.isfile(win_bank_file):
+                            os.remove(win_bank_file)
+
+                        winning_bank_df.to_excel(win_bank_file, index=False)
+
+os.chdir("../../")
+
+weekly_stats_file = f"Week_{whole_week}_statistics.txt"
+
+if os.path.exists(weekly_stats_file):
+    os.remove(weekly_stats_file)
+
+with open(weekly_stats_file, "a+") as file:
+    for row in statistics:
+        file.write(f"{row}\n")
+
+time_end = datetime.now()
+time_took = time_end - time_start
+
+print(f"Done! The execution of this script took {time_took.seconds} seconds.")
