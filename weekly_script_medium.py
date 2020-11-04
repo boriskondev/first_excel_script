@@ -41,14 +41,13 @@ for element in source_path.glob("*"):
                     all_df = pd.read_excel(file, sheet_name=0, skiprows=None)
                     all_df.columns = all_df.columns.str.strip()
                     all_df["Банка*:"] = all_df["Банка*:"].str.strip()
-                    all_df["Reg_date"], all_df["Reg_time"] = all_df["Submitted date"].str.split(" ").str
+                    all_df[["Reg_date", "Reg_time"]] = all_df["Submitted date"].str.split(" ", expand=True)
 
                     for code in codes_to_remove:
                         all_df["Отор. код на ПОС бележка*:"] = \
                             [x.strip().replace(code, "").strip() for x in all_df["Отор. код на ПОС бележка*:"]]
 
-                    statistics = append_and_print_statistics(f"Total registrations: {all_df.shape[0]}", statistics)
-
+                    initial_df = all_df.copy(deep=True)
                     duplicates_df = all_df[all_df.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:"], keep="first")]
                     all_df.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:"], keep="first", inplace=True)
 
@@ -69,14 +68,18 @@ for element in source_path.glob("*"):
 
                     os.chdir(weekly_processed_folder)
 
+                    weekly_all = f"Week_{whole_week}_all_registrations.xlsx"
                     weekly_duplicates = f"Week_{whole_week}_duplicates.xlsx"
                     weekly_without_duplicates = f"Week_{whole_week}_without_duplicates.xlsx"
 
-                    current_files = [weekly_duplicates, weekly_without_duplicates]
+                    current_files = [weekly_all, weekly_duplicates, weekly_without_duplicates]
 
                     for current_file in current_files:
                         if os.path.exists(current_file):
                             os.remove(current_file)
+
+                    initial_df.to_excel(weekly_all, index=False)
+                    statistics = append_and_print_statistics(f"Total registrations: {all_df.shape[0]}", statistics)
 
                     duplicates_df.to_excel(weekly_duplicates, index=False)
                     statistics = append_and_print_statistics(f"Duplicates: {duplicates_df.shape[0]}", statistics)
@@ -86,6 +89,7 @@ for element in source_path.glob("*"):
 
                     all_df["Имейл*:"] = all_df["Имейл*:"].str.strip()
                     emails_list = all_df["Имейл*:"].unique()
+
                     statistics = append_and_print_statistics(f"Unique emails: {len(emails_list)}", statistics)
 
                     os.chdir("../../")
