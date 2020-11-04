@@ -48,8 +48,8 @@ for element in source_path.glob("*"):
                             [x.strip().replace(code, "").strip() for x in all_df["Отор. код на ПОС бележка*:"]]
 
                     initial_df = all_df.copy(deep=True)
-                    duplicates_df = all_df[all_df.duplicated(["Имейл*:", "Отор. код на ПОС бележка*:"], keep="first")]
-                    all_df.drop_duplicates(["Имейл*:", "Отор. код на ПОС бележка*:"], keep="first", inplace=True)
+                    duplicates_df = all_df[all_df.duplicated(["Име*:", "Отор. код на ПОС бележка*:"], keep="first")]
+                    all_df.drop_duplicates(["Име*:", "Отор. код на ПОС бележка*:"], keep="first", inplace=True)
 
                     whole_week = element.name.split()[1]
 
@@ -79,7 +79,7 @@ for element in source_path.glob("*"):
                             os.remove(current_file)
 
                     initial_df.to_excel(weekly_all, index=False)
-                    statistics = append_and_print_statistics(f"Total registrations: {all_df.shape[0]}", statistics)
+                    statistics = append_and_print_statistics(f"Total registrations: {initial_df.shape[0]}", statistics)
 
                     duplicates_df.to_excel(weekly_duplicates, index=False)
                     statistics = append_and_print_statistics(f"Duplicates: {duplicates_df.shape[0]}", statistics)
@@ -90,7 +90,7 @@ for element in source_path.glob("*"):
                     all_df["Имейл*:"] = all_df["Имейл*:"].str.strip()
                     emails_list = all_df["Имейл*:"].unique()
 
-                    statistics = append_and_print_statistics(f"Unique emails: {len(emails_list)}", statistics)
+                    statistics = append_and_print_statistics(f"Unique emails: {len(emails_list)}\n", statistics)
 
                     os.chdir("../../")
                     os.chdir(weekly_winners_folder)
@@ -119,9 +119,7 @@ for element in source_path.glob("*"):
                     os.chdir(winning_banks_folder)
 
                     for bank in weekly_winners_df["Банка*:"].unique():
-
                         winning_bank_df = weekly_winners_df[weekly_winners_df["Банка*:"] == bank]
-
                         bank_name = banks_en_names[bank]
 
                         if winning_bank_df.shape[0] == 1:
@@ -133,6 +131,13 @@ for element in source_path.glob("*"):
                             os.remove(win_bank_file)
 
                         winning_bank_df.to_excel(win_bank_file, index=False)
+
+                    statistics = append_and_print_statistics("Registrations by bank (without duplicates):", statistics)
+
+                    for bank in all_df["Банка*:"].unique():
+                        bank_df = all_df[all_df["Банка*:"] == bank]
+                        bank_info_to_write = f"{banks_en_names[bank]}: {bank_df.shape[0]}"
+                        statistics = append_and_print_statistics(bank_info_to_write, statistics)
 
 os.chdir("../../")
 
@@ -148,4 +153,4 @@ with open(weekly_stats_file, "a+") as file:
 time_end = datetime.now()
 time_took = time_end - time_start
 
-print(f"Done! The execution of this script took {time_took.seconds} seconds.")
+print(f"\nDone! The execution of this script took {time_took.seconds} seconds.")
