@@ -41,6 +41,7 @@ for element in source_path.glob("*"):
                     all_df = pd.read_excel(file, sheet_name=0, skiprows=None)
                     all_df.columns = all_df.columns.str.strip()
                     all_df["Банка*:"] = all_df["Банка*:"].str.strip()
+                    all_df["Име*:"] = all_df["Име*:"].str.strip()
                     all_df[["Reg_date", "Reg_time"]] = all_df["Submitted date"].str.split(" ", expand=True)
 
                     for code in codes_to_remove:
@@ -94,13 +95,11 @@ for element in source_path.glob("*"):
 
                     statistics = append_and_print_statistics("Registrations by bank (without duplicates):", statistics)
 
-                    weekly_unique_banks = all_df["Банка*:"].unique()
-
                     for bank in banks_en_names:
 
                         bank_info_to_write = ""
 
-                        if bank in weekly_unique_banks:
+                        if bank in all_df["Банка*:"].unique():
                             bank_df = all_df[all_df["Банка*:"] == bank]
                             bank_info_to_write = f"{banks_en_names[bank]}: {bank_df.shape[0]}"
                         else:
@@ -134,19 +133,28 @@ for element in source_path.glob("*"):
 
                     os.chdir(winning_banks_folder)
 
-                    for bank in weekly_winners_df["Банка*:"].unique():
-                        winning_bank_df = weekly_winners_df[weekly_winners_df["Банка*:"] == bank]
-                        bank_name = banks_en_names[bank]
+                    statistics = append_and_print_statistics("\nWinners by bank:", statistics)
 
-                        if winning_bank_df.shape[0] == 1:
-                            win_bank_file = f"Week_{whole_week}_winner_{bank_name}.xlsx"
+                    for bank in banks_en_names:
+                        bank_info_to_write = ""
+                        if bank in weekly_winners_df["Банка*:"].unique():
+                            winning_bank_df = weekly_winners_df[weekly_winners_df["Банка*:"] == bank]
+                            bank_info_to_write = f"{banks_en_names[bank]}: {winning_bank_df.shape[0]}"
+                            bank_name = banks_en_names[bank]
+
+                            if winning_bank_df.shape[0] == 1:
+                                win_bank_file = f"Week_{whole_week}_winner_{bank_name}.xlsx"
+                            else:
+                                win_bank_file = f"Week_{whole_week}_winners_{bank_name}.xlsx"
+
+                            if os.path.isfile(win_bank_file):
+                                os.remove(win_bank_file)
+
+                            winning_bank_df.to_excel(win_bank_file, index=False)
                         else:
-                            win_bank_file = f"Week_{whole_week}_winners_{bank_name}.xlsx"
+                            bank_info_to_write = f"{banks_en_names[bank]}: 0"
 
-                        if os.path.isfile(win_bank_file):
-                            os.remove(win_bank_file)
-
-                        winning_bank_df.to_excel(win_bank_file, index=False)
+                        statistics = append_and_print_statistics(bank_info_to_write, statistics)
 
 os.chdir("../../")
 
