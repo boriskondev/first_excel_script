@@ -24,7 +24,7 @@ codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replac
 
 statistics = []
 
-week_to_process = 1
+week_to_process = 2
 weekly_winners = 50
 weekly_reserves = 50
 
@@ -92,6 +92,22 @@ for element in source_path.glob("*"):
 
                     statistics = append_and_print_statistics(f"Unique emails: {len(emails_list)}\n", statistics)
 
+                    statistics = append_and_print_statistics("Registrations by bank (without duplicates):", statistics)
+
+                    weekly_unique_banks = all_df["Банка*:"].unique()
+
+                    for bank in banks_en_names:
+
+                        bank_info_to_write = ""
+
+                        if bank in weekly_unique_banks:
+                            bank_df = all_df[all_df["Банка*:"] == bank]
+                            bank_info_to_write = f"{banks_en_names[bank]}: {bank_df.shape[0]}"
+                        else:
+                            bank_info_to_write = f"{banks_en_names[bank]}: 0"
+
+                        statistics = append_and_print_statistics(bank_info_to_write, statistics)
+
                     os.chdir("../../")
                     os.chdir(weekly_winners_folder)
 
@@ -131,13 +147,6 @@ for element in source_path.glob("*"):
                             os.remove(win_bank_file)
 
                         winning_bank_df.to_excel(win_bank_file, index=False)
-
-                    statistics = append_and_print_statistics("Registrations by bank (without duplicates):", statistics)
-
-                    for bank in all_df["Банка*:"].unique():
-                        bank_df = all_df[all_df["Банка*:"] == bank]
-                        bank_info_to_write = f"{banks_en_names[bank]}: {bank_df.shape[0]}"
-                        statistics = append_and_print_statistics(bank_info_to_write, statistics)
 
 os.chdir("../../")
 
