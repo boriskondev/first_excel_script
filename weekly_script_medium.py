@@ -44,6 +44,8 @@ for element in source_path.glob("*"):
                     all_df["Име*:"] = all_df["Име*:"].str.strip()
                     all_df[["Reg_date", "Reg_time"]] = all_df["Submitted date"].str.split(" ", expand=True)
 
+                    # PROCESS THE FOLLOWING CASE AS WELL - AC 331735/ NO 015288
+                    # IF THE CODE IS INSIDE? EXAMPLE 5820611CA723ACCF
                     for code in codes_to_remove:
                         all_df["Отор. код на ПОС бележка*:"] = \
                             [x.strip().replace(code, "").strip() for x in all_df["Отор. код на ПОС бележка*:"]]
