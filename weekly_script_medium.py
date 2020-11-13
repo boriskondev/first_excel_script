@@ -12,6 +12,18 @@ def append_and_print_statistics(data, li):
     li.append(data)
     return li
 
+# Should be tested better before use
+# def process_code(data, current_code):
+#     symbol = "/"
+#     if symbol in data:
+#         data = data.split(symbol)[0]
+#     if current_code in data:
+#         data = data.strip().replace(current_code, "").strip()
+#
+#     return data
+
+# What if the code is inside? As is 5820611CA723ACCF?
+
 
 time_start = datetime.now()
 
@@ -44,8 +56,6 @@ for element in source_path.glob("*"):
                     all_df["Име*:"] = all_df["Име*:"].str.strip()
                     all_df[["Reg_date", "Reg_time"]] = all_df["Submitted date"].str.split(" ", expand=True)
 
-                    # PROCESS THE FOLLOWING CASE AS WELL - AC 331735/ NO 015288
-                    # IF THE CODE IS INSIDE? EXAMPLE 5820611CA723ACCF
                     for code in codes_to_remove:
                         all_df["Отор. код на ПОС бележка*:"] = \
                             [x.strip().replace(code, "").strip() for x in all_df["Отор. код на ПОС бележка*:"]]
