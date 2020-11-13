@@ -24,8 +24,6 @@ def process_code(data, current_code):
     return data
 
 
-
-
 time_start = datetime.now()
 
 project_config = docx.Document("config_new.docx")
