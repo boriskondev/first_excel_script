@@ -3,7 +3,6 @@ from pathlib import Path
 import docx
 import pandas as pd
 import os
-import numpy as np
 import yaml
 
 
@@ -12,17 +11,19 @@ def append_and_print_statistics(data, li):
     li.append(data)
     return li
 
-# Should be tested better before use
-# def process_code(data, current_code):
-#     symbol = "/"
-#     if symbol in data:
-#         data = data.split(symbol)[0]
-#     if current_code in data:
-#         data = data.strip().replace(current_code, "").strip()
-#
-#     return data
 
-# What if the code is inside? As is 5820611CA723ACCF?
+# Enrich with logic when the code in in front/inside string, for example as - 5820611CA723ACCF?.
+# Hints - check length and if it is greater than 6, use the initial code before the process.
+def process_code(data, current_code):
+    symbol = "/"
+    if current_code in data:
+        data = data.strip().replace(current_code, "").strip()
+        if symbol in data:
+            data = data.split(symbol)[0]
+
+    return data
+
+
 
 
 time_start = datetime.now()
@@ -58,7 +59,7 @@ for element in source_path.glob("*"):
 
                     for code in codes_to_remove:
                         all_df["Отор. код на ПОС бележка*:"] = \
-                            [x.strip().replace(code, "").strip() for x in all_df["Отор. код на ПОС бележка*:"]]
+                            [process_code(x, code) for x in all_df["Отор. код на ПОС бележка*:"]]
 
                     initial_df = all_df.copy(deep=True)
                     duplicates_df = all_df[all_df.duplicated(["Име*:", "Отор. код на ПОС бележка*:"], keep="first")]
