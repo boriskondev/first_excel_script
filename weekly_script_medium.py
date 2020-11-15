@@ -12,14 +12,14 @@ def append_and_print_statistics(data, li):
     return li
 
 
-# Enrich with logic when the code in in front/inside string, for example as - 5820611CA723ACCF?.
-# Hints - check length and if it is greater than 6, use the initial code before the process.
 def process_code(data, current_code):
-    symbol = "/"
-    if current_code in data:
+    symbols = ["/", "NO"]
+    data = data.strip()
+    if current_code in data[0: len(current_code)]:
         data = data.strip().replace(current_code, "").strip()
-        if symbol in data:
-            data = data.split(symbol)[0]
+        for symbol in symbols:
+            if symbol in data:
+                data = data.split(symbol)[0].strip()
 
     return data
 
