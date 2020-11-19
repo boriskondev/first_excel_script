@@ -1,5 +1,7 @@
 import docx
 
+new_codes = ['Авт, код', 'avt. Kod', 'AВТ КОД', 'ABT. КОД:']
+
 # code = input().strip()
 #
 # while code != "END":
@@ -7,8 +9,6 @@ import docx
 #     code = input().strip()
 #
 # print(new_codes)
-
-new_codes = ['АUTH.СODE:', 'Авт, код', 'ABT', 'NO', 'N0', 'авт.код', 'avt. Kod', 'ABT. КОД', 'ABТ.КОД', 'Сет. Код / AC:', 'ABT. КОД', 'Код', 'AUTH', 'AUTH.CODE', 'ЕИК:', 'ABT. KOD:', 'авт код', 'АВТ.код', 'авт.код', 'ABT. КОД', 'avt. Kod', 'AUTH.CODE', 'AUTH:', 'DRN:', 'AUTH CODE', 'MID:', 'Mid']
 
 project_config = docx.Document("config_new.docx")
 codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replace("\"", "").split(", ")
