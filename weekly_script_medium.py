@@ -11,7 +11,7 @@ def append_and_print_statistics(data, li):
     li.append(data)
     return li
 
-
+#  Да добавя "ABT.KOД"
 def process_code(data, current_code):
     symbols = ["/", "NO"]
     data = data.strip()
