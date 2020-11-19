@@ -35,7 +35,7 @@ codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replac
 
 statistics = []
 
-week_to_process = 2
+week_to_process = 3
 weekly_winners = 50
 weekly_reserves = 50
 
