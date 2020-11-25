@@ -11,7 +11,7 @@ def append_and_print_statistics(data, li):
     li.append(data)
     return li
 
-#  Да добавя "ABT.KOД"
+
 def process_code(data, current_code):
     symbols = ["/", "NO"]
     data = data.strip()
@@ -28,14 +28,18 @@ time_start = datetime.now()
 
 project_config = docx.Document("config_new.docx")
 
-source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"", ""))  # pathlib.WindowsPath
-output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"", ""))   # pathlib.WindowsPath
-banks_en_names = yaml.safe_load(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))  # dict
-codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replace("\"", "").split(", ")  # list
+source_path = Path(project_config.paragraphs[0].text.split("=")[1].replace("\"", ""))
+output_path = Path(project_config.paragraphs[1].text.split("=")[1].replace("\"", ""))
+banks_en_names = yaml.safe_load(project_config.paragraphs[2].text.split("=")[1].replace("\"", ""))
+codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replace("\"", "").split(", ")
 
 statistics = []
 
-week_to_process = 3
+# АВТ, КОД:
+# ,AC
+# Авт, код
+
+week_to_process = 4
 weekly_winners = 50
 weekly_reserves = 50
 
