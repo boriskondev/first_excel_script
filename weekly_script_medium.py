@@ -35,17 +35,15 @@ codes_to_remove = project_config.paragraphs[3].text.split("=")[1].strip().replac
 
 statistics = []
 
-# АВТ, КОД:
-# ,AC
-# Авт, код
-
-week_to_process = 4
+week_to_process = ""
 weekly_winners = 50
 weekly_reserves = 50
 
 whole_week = ""
 
 os.chdir(output_path)
+
+# Авт.код.
 
 for element in source_path.glob("*"):
     if os.path.isdir(element):
