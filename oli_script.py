@@ -97,7 +97,7 @@ for element in SOURCE_PATH.glob("*"):
                     weekly_all = f"Week_{whole_week}_all_registrations.xlsx"
                     weekly_duplicates = f"Week_{whole_week}_duplicates.xlsx"
                     weekly_without_duplicates = f"Week_{whole_week}_without_duplicates.xlsx"
-                    weekly_nths = f"Week_{whole_week}_thirds.xlsx"
+                    weekly_nths = f"Week_{whole_week}_nths.xlsx"
 
                     current_files = [weekly_all, weekly_duplicates, weekly_without_duplicates, weekly_nths]
 
