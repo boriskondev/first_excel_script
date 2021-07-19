@@ -158,7 +158,13 @@ for element in SOURCE_PATH.glob("*"):
                     for day in days_of_week:
                         daily_df = all_df[all_df["Reg_date"] == day]
                         statistics = append_and_print_statistics(f"Entries for {day}: {daily_df.shape[0]}", statistics)
-                        daily_drawn_df = daily_df.sample(n=DAILY_WINNERS + DAILY_RESERVES)
+                        daily_drawn_df = pd.DataFrame
+
+                        if daily_df.shape[0] < (DAILY_WINNERS + DAILY_RESERVES):
+                            daily_drawn_df = daily_df.sample(n=DAILY_WINNERS + (daily_df.shape[0] - DAILY_RESERVES))
+                        else:
+                            daily_drawn_df = daily_df.sample(n=DAILY_WINNERS + DAILY_RESERVES)
+
                         daily_drawn_df = daily_drawn_df.reset_index(drop=True)
                         daily_winners_df = daily_drawn_df.loc[0:(DAILY_WINNERS - 1)]
                         daily_winners_df.insert(0, "Status", DAILY_PRIZES_LIST)
